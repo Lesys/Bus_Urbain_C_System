@@ -11,43 +11,65 @@ namespace ApplicationBus
 		#region Propriétés
 
 		private int nbPlaces;
-		private Mutex porteAvant;
-		private Mutex porteArriere;
 		private bool demandeArret;
+		private Semaphore porteAvant;
+		private Semaphore porteArriere;
 
 		#endregion
 
 		#region Constructeurs
 
+		// Constructeur par défaut sans paramètre
 		public Bus()
 		{
+			Random rand = new Random();
+			this.nbPlaces = rand.Next(25, 31);
+			this.demandeArret = false;
+			this.porteAvant = new Semaphore(1, 1);
+			this.porteArriere = new Semaphore(2, 2);
+		}
+
+		// Constructeur avec le nombre de place en saisie
+		public Bus(int nbPlaces)
+		{
+			this.nbPlaces = nbPlaces;
+			this.demandeArret = false;
+			this.porteAvant = new Semaphore(1, 1);
+			this.porteArriere = new Semaphore(2, 2);
 		}
 
 		#endregion
 
 		#region Méthodes
 
+		// Récupère le nombre de place que le bus peut atteindre au maximum
 		public int getNbPlaces()
 		{
-			return nbPlaces;
+			return this.nbPlaces;
 		}
 
+		// Augmente le nombre de place occupées dans le bus de 1
 		public void incNbPlaces()
 		{
-			Interlocked.Increment(ref nbPlaces);
+			Interlocked.Increment(ref this.nbPlaces);
 		}
 
+		// Diminue le nombre de place occupées dans le bus de 1
 		public void decNbPlaces()
 		{
-			Interlocked.Decrement(ref nbPlaces);
+			Interlocked.Decrement(ref this.nbPlaces);
 		}
-		public Mutex getMutexPorteAvant()
+
+		// Récupère la porte avant du bus
+		public Semaphore getMutexPorteAvant()
 		{
-			return porteAvant;
+			return this.porteAvant;
 		}
-		public Mutex getMutexPorteArriere()
+
+		// Récupère les portes arrières du bus
+		public Semaphore getMutexPorteArriere()
 		{
-			return porteArriere;
+			return this.porteArriere;
 		}
 		/*public void ControlerPassager()
 		{
