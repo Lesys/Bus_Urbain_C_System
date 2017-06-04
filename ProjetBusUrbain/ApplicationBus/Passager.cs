@@ -10,10 +10,9 @@ namespace ApplicationBus
 	{
 		#region Propriétés
 
-		private int nbPlaces;
-		private Mutex porteAvant;
-		private Mutex porteArriere;
-		private bool demandeArret;
+		private Bus bus;
+		private bool possedeTicket;
+		private bool veutDescendre;
 
 		#endregion
 
@@ -25,9 +24,21 @@ namespace ApplicationBus
 
 		#endregion
 
-		#region Méthodes
-		
+		#region Accesseurs
 
+		public bool getPossedeTicket()
+		{
+			return this.possedeTicket;
+		}
+
+		#endregion
+
+		#region Méthodes
+
+		public void MonterTitreTransport()
+		{
+
+		}
 
 		#endregion
 	}
