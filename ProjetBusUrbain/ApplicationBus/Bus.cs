@@ -40,18 +40,12 @@ namespace ApplicationBus
 
 		#endregion
 
-		#region Méthodes
+		#region Accesseurs
 
 		// Récupère le nombre de place que le bus peut atteindre au maximum
 		public int getNbPlaces()
 		{
 			return this.nbPlaces;
-		}
-
-		// Augmente le nombre de place occupées dans le bus de 1
-		public void incNbPlaces()
-		{
-			Interlocked.Increment(ref this.nbPlaces);
 		}
 
 		// Diminue le nombre de place occupées dans le bus de 1
@@ -64,6 +58,16 @@ namespace ApplicationBus
 		public Semaphore getMutexPorteAvant()
 		{
 			return this.porteAvant;
+		}
+
+		#endregion
+
+		#region Méthodes
+
+		// Augmente le nombre de place occupées dans le bus de 1
+		public void incNbPlaces()
+		{
+			Interlocked.Increment(ref this.nbPlaces);
 		}
 
 		// Récupère les portes arrières du bus
